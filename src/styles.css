@@ -141,7 +141,7 @@ p {
   text-align: center;
   padding: 0;
 }
-.header-sunday {
+.main-date {
   font-weight: 400px;
   color: #42a5f5;
   border-bottom-color: #ba38ff;
@@ -167,7 +167,7 @@ p {
 .enter {
   text-align: center;
 }
-.sunday {
+#main-icon {
   height: 75px;
   width: 75px;
   display: block;

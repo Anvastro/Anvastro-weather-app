@@ -21,8 +21,8 @@ function formatDate(date) {
   return `${day} ${hours}:${minutes}`;
 }
 let today = new Date();
-let headerSunday = document.querySelector("#headerSunday");
-headerSunday.innerHTML = formatDate(today);
+let mainDate = document.querySelector("#main-date");
+mainDate.innerHTML = formatDate(today);
 
 function cityPosition(position) {
   position.preventDefault();
@@ -44,11 +44,25 @@ function currentTemperature(response) {
   document.querySelector("#main-city-temp").innerHTML = Math.round(
     response.data.main.temp
   );
-  document.querySelector("#wind").innerHTML = response.data.wind.speed;
+  document.querySelector("#wind").innerHTML = Math.round(
+    response.data.wind.speed
+  );
   document.querySelector("#humidity").innerHTML = response.data.main.humidity;
-  document.querySelector("#precipitation").innerHTML = response.data.rain;
+  document.querySelector("#real-feel").innerHTML = Math.round(
+    response.data.main.feels_like
+  );
   document.querySelector("#main-description").innerHTML =
     response.data.weather[0].description;
+  document
+    .querySelector("#main-icon")
+    .setAttribute(
+      "src",
+      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    );
+  document
+    .querySelector("#main-icon")
+    .setAttribute("alt", response.data.weather[0].main);
+  console.log(response.data);
 }
 function currentPosition(position) {
   let latitude = position.coords.latitude;
@@ -59,10 +73,16 @@ function currentPosition(position) {
 
   axios.get(apiUrl).then(currentTemperature);
 }
-
 function currentLocation() {
   navigator.geolocation.getCurrentPosition(currentPosition);
 }
 
 let locationIcon = document.querySelector("#location-icon");
 locationIcon.addEventListener("click", currentLocation);
+
+let apiKey = "b110a6f2cf89a7609c27cec0f53fa75b";
+let city = "port erin";
+let units = "metric";
+let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
+
+axios.get(apiUrl).then(currentTemperature);
