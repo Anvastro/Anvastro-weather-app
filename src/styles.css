@@ -39,7 +39,7 @@ h6 {
 a {
   text-decoration: none;
 }
-a:hover {
+.active {
   color: #1ab2a8;
 }
 form {

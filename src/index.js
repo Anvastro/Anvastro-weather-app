@@ -62,7 +62,8 @@ function currentTemperature(response) {
   document
     .querySelector("#main-icon")
     .setAttribute("alt", response.data.weather[0].main);
-  console.log(response.data);
+
+  celsTemp = Math.round(response.data.main.temp);
 }
 function currentPosition(position) {
   let latitude = position.coords.latitude;
@@ -79,6 +80,34 @@ function currentLocation() {
 
 let locationIcon = document.querySelector("#location-icon");
 locationIcon.addEventListener("click", currentLocation);
+
+function fahrenheitTemperature(event) {
+  event.preventDefault();
+  let fahrenheitTemp = (celsTemp * 9) / 5 + 32;
+  let cityMainTemp = document.querySelector("#main-city-temp");
+  let fahDegrees = document.querySelector("#degrees");
+  cityMainTemp.innerHTML = Math.round(fahrenheitTemp);
+  fahDegrees.innerHTML = `°F`;
+  celsiusLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
+}
+
+function celsiusTemperature(event) {
+  event.preventDefault();
+  let cityMainTemp = document.querySelector("#main-city-temp");
+  let celDegrees = document.querySelector("#degrees");
+  cityMainTemp.innerHTML = celsTemp;
+  celDegrees.innerHTML = `°C`;
+  fahrenheitLink.classList.remove("active");
+  celsiusLink.classList.add("active");
+}
+let celsTemp = null;
+
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", fahrenheitTemperature);
+
+let celsiusLink = document.querySelector("#celsius-link");
+celsiusLink.addEventListener("click", celsiusTemperature);
 
 let apiKey = "b110a6f2cf89a7609c27cec0f53fa75b";
 let city = "port erin";
