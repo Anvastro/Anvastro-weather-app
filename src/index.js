@@ -101,7 +101,7 @@ function celsiusTemperature(event) {
   let cityMainTemp = document.querySelector("#main-city-temp");
   let celDegrees = document.querySelector("#degrees");
   cityMainTemp.innerHTML = celsTemp;
-  realFeel.innerHTML = realFahrenheitTemp;
+  realFeel.innerHTML = feelsLike;
   celDegrees.innerHTML = `°C`;
   fahrenheitLink.classList.remove("active");
   celsiusLink.classList.add("active");
