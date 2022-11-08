@@ -64,6 +64,7 @@ function currentTemperature(response) {
     .setAttribute("alt", response.data.weather[0].main);
 
   celsTemp = Math.round(response.data.main.temp);
+  feelsLike = Math.round(response.data.main.feels_like);
 }
 function currentPosition(position) {
   let latitude = position.coords.latitude;
@@ -84,9 +85,12 @@ locationIcon.addEventListener("click", currentLocation);
 function fahrenheitTemperature(event) {
   event.preventDefault();
   let fahrenheitTemp = (celsTemp * 9) / 5 + 32;
+  let realFahrenheitTemp = (feelsLike * 9) / 5 + 32;
   let cityMainTemp = document.querySelector("#main-city-temp");
   let fahDegrees = document.querySelector("#degrees");
+  let realFeel = document.querySelector("#real-feel");
   cityMainTemp.innerHTML = Math.round(fahrenheitTemp);
+  realFeel.innerHTML = Math.round(realFahrenheitTemp);
   fahDegrees.innerHTML = `°F`;
   celsiusLink.classList.remove("active");
   fahrenheitLink.classList.add("active");
@@ -97,11 +101,13 @@ function celsiusTemperature(event) {
   let cityMainTemp = document.querySelector("#main-city-temp");
   let celDegrees = document.querySelector("#degrees");
   cityMainTemp.innerHTML = celsTemp;
+  realFeel.innerHTML = realFahrenheitTemp;
   celDegrees.innerHTML = `°C`;
   fahrenheitLink.classList.remove("active");
   celsiusLink.classList.add("active");
 }
 let celsTemp = null;
+let feelsLike = null;
 
 let fahrenheitLink = document.querySelector("#fahrenheit-link");
 fahrenheitLink.addEventListener("click", fahrenheitTemperature);
