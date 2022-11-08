@@ -87,9 +87,9 @@ function fahrenheitTemperature(event) {
   let fahrenheitTemp = (celsTemp * 9) / 5 + 32;
   let realFahrenheitTemp = (feelsLike * 9) / 5 + 32;
   let cityMainTemp = document.querySelector("#main-city-temp");
-  let fahDegrees = document.querySelector("#degrees");
+  let fahDegrees = document.querySelector("#main-degrees");
   let realFeel = document.querySelector("#real-feel");
-  let realFahDegrees = document.querySelector("#real-temperature");
+  let realFahDegrees = document.querySelector("#real-degrees");
   cityMainTemp.innerHTML = Math.round(fahrenheitTemp);
   realFeel.innerHTML = Math.round(realFahrenheitTemp);
   fahDegrees.innerHTML = `°F`;
@@ -101,9 +101,9 @@ function fahrenheitTemperature(event) {
 function celsiusTemperature(event) {
   event.preventDefault();
   let cityMainTemp = document.querySelector("#main-city-temp");
-  let celDegrees = document.querySelector("#degrees");
+  let celDegrees = document.querySelector("#main-degrees");
   let realFeel = document.querySelector("#real-feel");
-  let realCelDegrees = document.querySelector("#real-temperature");
+  let realCelDegrees = document.querySelector("#real-degrees");
   cityMainTemp.innerHTML = celsTemp;
   realFeel.innerHTML = feelsLike;
   celDegrees.innerHTML = `°C`;

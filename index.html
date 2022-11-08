@@ -54,7 +54,8 @@
                 <h2>
                   <span id="main-city-name"></span>,
                   <span id="country"></span>
-                  <span id="main-city-temp"></span><span id="degrees">°C</span>
+                  <span id="main-city-temp"></span
+                  ><span id="main-degrees">°C</span>
                 </h2>
               </div>
               <div class="col-3">
@@ -68,7 +69,7 @@
                 <span id="humidity" class="bluecolor"></span
                 ><span class="bluecolor">% </span>Real feel
                 <span id="real-feel" class="bluecolor"></span
-                ><span id="real-temperature" class="bluecolor">°C</span>
+                ><span id="real-degrees" class="bluecolor">°C</span>
               </h3>
             </div>
             <div class="col">
@@ -92,11 +93,20 @@
         </div>
         <div class="col">
           <div class="card">
-            <div class="card-header bg-transparent">Tue, Oct 13</div>
+            <div id="forecast-date" class="card-header bg-transparent">
+              Tue, Oct 13
+            </div>
             <img src="images/tue.png" class="card-img-top" alt="icon" />
             <div class="card-body">
-              <h6 class="card-title">16°C | 9°C</h6>
-              <p class="card-text">Periods of rain.</p>
+              <h6 class="card-title">
+                <span id="forecast-max">16</span
+                ><span id="forecast-units">°C</span> |
+                <span id="forecast-min"></span
+                ><span id="forecast-units">°C</span>
+              </h6>
+              <p id="forecast-description" class="card-text">
+                Periods of rain.
+              </p>
             </div>
           </div>
         </div>
