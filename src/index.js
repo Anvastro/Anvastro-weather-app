@@ -24,6 +24,39 @@ let today = new Date();
 let mainDate = document.querySelector("#main-date");
 mainDate.innerHTML = formatDate(today);
 
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+  let forecastHTML = `<div class="row two">`;
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `<div class="col">
+        <div class="card">
+          <div id="forecast-date" class="card-header bg-transparent">
+            ${day}, Oct 13
+          </div>
+          <img src="images/tue.png" class="card-img-top" alt="icon" />
+          <div class="card-body">
+            <h5 class="card-title">
+              <span id="forecast-max">16</span>
+              <span id="forecast-units">°C</span> |
+              <span id="forecast-min"></span>
+              <span id="forecast-units">°C</span>
+            </h5>
+            <h6 id="forecast-description" class="card-text">
+              Periods of rain
+            </h6>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
 function cityPosition(position) {
   position.preventDefault();
   let apiKey = "b110a6f2cf89a7609c27cec0f53fa75b";
@@ -126,3 +159,5 @@ let units = "metric";
 let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
 
 axios.get(apiUrl).then(currentTemperature);
+
+displayForecast();

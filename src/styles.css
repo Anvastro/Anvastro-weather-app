@@ -1,14 +1,14 @@
 body {
   margin: 0 auto;
 }
-h1 {
+h2 {
   text-align: center;
   font-size: 30px;
   color: #42a5f5;
   margin: 0px;
   padding: 15px;
 }
-h2 {
+h1 {
   text-transform: uppercase;
   font-weight: 700;
   color: #1ab2a8;
@@ -18,23 +18,30 @@ h2 {
   margin-bottom: 5px;
 }
 h3 {
-  font-size: 12px;
+  font-size: 15px;
   color: #ba38ff;
   padding-top: 0px;
   padding-bottom: 5px;
   margin: 0px;
 }
 h4 {
-  font-size: 12px;
+  font-size: 15px;
   color: #5a6bcc;
   padding-top: 0px;
   padding-bottom: 5px;
   margin: 0px;
 }
-h6 {
+h5 {
   font-size: 15px;
   font-weight: 700;
   color: #1ab2a8;
+}
+h6 {
+  text-align: center;
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 1px;
+  color: #5a6bcc;
 }
 a {
   text-decoration: none;
@@ -74,13 +81,6 @@ form {
   background-repeat: no-repeat;
   border: transparent;
   cursor: pointer;
-}
-p {
-  text-align: center;
-  font-size: 10px;
-  font-weight: bolder;
-  margin-bottom: 1px;
-  color: #5a6bcc;
 }
 
 .container {
