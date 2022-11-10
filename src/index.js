@@ -84,9 +84,9 @@ function displayForecast(response) {
             <h5 class="card-title">
               <span id="forecast-max">${Math.round(
                 forecastDay.temp.max
-              )}</span><span id="forecast-units">°C</span> | <span id="forecast-min">${Math.round(
+              )}</span><span id="forecast-degrees">°C</span> | <span id="forecast-min">${Math.round(
             forecastDay.temp.min
-          )}</span><span id="forecast-units">°C</span>
+          )}</span><span id="forecast-degress">°C</span>
             </h5>
             <h6 id="forecast-description" class="card-text">
               Periods of rain
