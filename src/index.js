@@ -24,7 +24,8 @@ let today = new Date();
 let mainDate = document.querySelector("#main-date");
 mainDate.innerHTML = formatDate(today);
 
-function displayForecast() {
+function displayForecast(response) {
+  console.log(response.data.daily);
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row two">`;
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri"];
@@ -55,6 +56,14 @@ function displayForecast() {
 
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
+}
+
+function getForecast(coordinates) {
+  let apiKey = "4c9b53e4f8f5eb00df5915bdca340605";
+  let units = "metric";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=${units}`;
+
+  axios.get(apiUrl).then(displayForecast);
 }
 
 function cityPosition(position) {
@@ -98,7 +107,10 @@ function currentTemperature(response) {
 
   celsTemp = Math.round(response.data.main.temp);
   feelsLike = Math.round(response.data.main.feels_like);
+
+  getForecast(response.data.coord);
 }
+
 function currentPosition(position) {
   let latitude = position.coords.latitude;
   let longitude = position.coords.longitude;
@@ -108,6 +120,7 @@ function currentPosition(position) {
 
   axios.get(apiUrl).then(currentTemperature);
 }
+
 function currentLocation() {
   navigator.geolocation.getCurrentPosition(currentPosition);
 }
@@ -144,6 +157,7 @@ function celsiusTemperature(event) {
   fahrenheitLink.classList.remove("active");
   celsiusLink.classList.add("active");
 }
+
 let celsTemp = null;
 let feelsLike = null;
 
@@ -159,5 +173,3 @@ let units = "metric";
 let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
 
 axios.get(apiUrl).then(currentTemperature);
-
-displayForecast();
