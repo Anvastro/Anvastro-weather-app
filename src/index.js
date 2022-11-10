@@ -18,32 +18,75 @@ function formatDate(date) {
     "Saturday",
   ];
   let day = days[today.getDay()];
-  return `${day} ${hours}:${minutes}`;
+  let months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  let month = months[today.getMonth()];
+  let number = today.getDate();
+  return `${hours}:${minutes} ${day}, ${month} ${number}`;
 }
 let today = new Date();
 let mainDate = document.querySelector("#main-date");
 mainDate.innerHTML = formatDate(today);
 
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  let day = days[date.getDay()];
+  let months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  let month = months[today.getMonth()];
+  let number = date.getDate();
+
+  return `${day}, ${month} ${number}`;
+}
+
 function displayForecast(response) {
-  console.log(response.data.daily);
+  let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row two">`;
-  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri"];
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `<div class="col">
+  forecast.forEach(function (forecastDay, index) {
+    if (index > 0) {
+      if (index < 7) {
+        forecastHTML =
+          forecastHTML +
+          `<div class="col">
         <div class="card">
           <div id="forecast-date" class="card-header bg-transparent">
-            ${day}, Oct 13
-          </div>
-          <img src="images/tue.png" class="card-img-top" alt="icon" />
+            ${formatDay(forecastDay.dt)}</div>
+          <img src="http://openweathermap.org/img/wn/${
+            forecastDay.weather[0].icon
+          }@2x.png" class="card-img-top" alt="icon" />
           <div class="card-body">
             <h5 class="card-title">
-              <span id="forecast-max">16</span>
-              <span id="forecast-units">°C</span> |
-              <span id="forecast-min"></span>
-              <span id="forecast-units">°C</span>
+              <span id="forecast-max">${Math.round(
+                forecastDay.temp.max
+              )}</span><span id="forecast-units">°C</span> | <span id="forecast-min">${Math.round(
+            forecastDay.temp.min
+          )}</span><span id="forecast-units">°C</span>
             </h5>
             <h6 id="forecast-description" class="card-text">
               Periods of rain
@@ -52,6 +95,8 @@ function displayForecast(response) {
         </div>
       </div>
     `;
+      }
+    }
   });
 
   forecastHTML = forecastHTML + `</div>`;
