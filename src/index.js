@@ -77,9 +77,9 @@ function displayForecast(response) {
         <div class="card">
           <div id="forecast-date" class="card-header bg-transparent">
             ${formatDay(forecastDay.dt)}</div>
-          <img src="http://openweathermap.org/img/wn/${
+          <img src="images/${
             forecastDay.weather[0].icon
-          }@2x.png" class="card-img-top" alt="icon" />
+          }.png" class="card-img-top" alt="icon" />
           <div class="card-body">
             <h5 class="card-title">
               <span id="forecast-max">${Math.round(
@@ -88,9 +88,9 @@ function displayForecast(response) {
             forecastDay.temp.min
           )}</span><span id="forecast-degress">°C</span>
             </h5>
-            <h6 id="forecast-description" class="card-text">
-              Periods of rain
-            </h6>
+            <h6 id="forecast-description" class="card-text">${
+              forecastDay.weather[0].description
+            }</h6>
           </div>
         </div>
       </div>
@@ -142,10 +142,7 @@ function currentTemperature(response) {
     response.data.weather[0].description;
   document
     .querySelector("#main-icon")
-    .setAttribute(
-      "src",
-      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-    );
+    .setAttribute("src", `images/${response.data.weather[0].icon}.png`);
   document
     .querySelector("#main-icon")
     .setAttribute("alt", response.data.weather[0].main);
