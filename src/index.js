@@ -74,27 +74,26 @@ function displayForecast(response) {
         forecastHTML =
           forecastHTML +
           `<div class="col">
-        <div class="card">
-          <div id="forecast-date" class="card-header bg-transparent">
-            ${formatDay(forecastDay.dt)}</div>
+          <div class="card">
+          <div id="forecast-date" class="card-header bg-transparent">${formatDay(
+            forecastDay.dt
+          )}</div>
           <img src="images/${
             forecastDay.weather[0].icon
           }.png" class="card-img-top" alt="icon" />
           <div class="card-body">
-            <h5 class="card-title">
-              <span id="forecast-max">${Math.round(
-                forecastDay.temp.max
-              )}</span><span id="forecast-degrees">°C</span> | <span id="forecast-min">${Math.round(
+          <h5 class="card-title"><span id="forecast-max">${Math.round(
+            forecastDay.temp.max
+          )}</span><span id="forecast-first"></span> | <span id="forecast-min">${Math.round(
             forecastDay.temp.min
-          )}</span><span id="forecast-degress">°C</span>
-            </h5>
-            <h6 id="forecast-description" class="card-text">${
-              forecastDay.weather[0].description
-            }</h6>
+          )}</span><span id="forecast-second"></span>
+          </h5>
+          <h6 id="forecast-description" class="card-text">${
+            forecastDay.weather[0].description
+          }</h6>
           </div>
-        </div>
-      </div>
-    `;
+          </div>
+          </div>`;
       }
     }
   });
@@ -160,6 +159,15 @@ function currentPosition(position) {
   let units = "metric";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`;
 
+  let celDegrees = document.querySelector("#main-degrees");
+  let realCelDegrees = document.querySelector("#real-degrees");
+
+  celDegrees.innerHTML = `°C`;
+  realCelDegrees.innerHTML = `°C`;
+
+  fahrenheitLink.classList.remove("active");
+  celsiusLink.classList.add("active");
+
   axios.get(apiUrl).then(currentTemperature);
 }
 
@@ -174,14 +182,28 @@ function fahrenheitTemperature(event) {
   event.preventDefault();
   let fahrenheitTemp = (celsTemp * 9) / 5 + 32;
   let realFahrenheitTemp = (feelsLike * 9) / 5 + 32;
+  let forecastMaxTemp = (maxTemp * 9) / 5 + 32;
+  let forecastMinTemp = (minTemp * 9) / 5 + 32;
+
   let cityMainTemp = document.querySelector("#main-city-temp");
   let fahDegrees = document.querySelector("#main-degrees");
   let realFeel = document.querySelector("#real-feel");
   let realFahDegrees = document.querySelector("#real-degrees");
+  let forecastMax = document.querySelector("#forecast-max");
+  let forecastMin = document.querySelector("#forecast-min");
+  let forecastFirst = document.querySelector("#forecast-first");
+  let forecastSecond = document.querySelector("#forecast-second");
+
   cityMainTemp.innerHTML = Math.round(fahrenheitTemp);
   realFeel.innerHTML = Math.round(realFahrenheitTemp);
+  forecastMax.innerHTML = Math.round(forecastMaxTemp);
+  forecastMin.innerHTML = Math.round(forecastMinTemp);
+
   fahDegrees.innerHTML = `°F`;
   realFahDegrees.innerHTML = `°F`;
+  forecastFirst.innerHTML = `°F`;
+  forecastSecond.innerHTML = `°F`;
+
   celsiusLink.classList.remove("active");
   fahrenheitLink.classList.add("active");
 }
@@ -192,16 +214,29 @@ function celsiusTemperature(event) {
   let celDegrees = document.querySelector("#main-degrees");
   let realFeel = document.querySelector("#real-feel");
   let realCelDegrees = document.querySelector("#real-degrees");
+  let forecastMax = document.querySelector("#forecast-max");
+  let forecastMin = document.querySelector("#forecast-min");
+  let forecastFirst = document.querySelector("#forecast-first");
+  let forecastSecond = document.querySelector("#forecast-second");
+
   cityMainTemp.innerHTML = celsTemp;
   realFeel.innerHTML = feelsLike;
+  forecastMax.innerHTML = maxTemp;
+  forecastMin.innerHTML = minTemp;
+
   celDegrees.innerHTML = `°C`;
   realCelDegrees.innerHTML = `°C`;
+  forecastFirst.innerHTML = `°C`;
+  forecastSecond.innerHTML = `°C`;
+
   fahrenheitLink.classList.remove("active");
   celsiusLink.classList.add("active");
 }
 
 let celsTemp = null;
 let feelsLike = null;
+let maxTemp = null;
+let minTemp = null;
 
 let fahrenheitLink = document.querySelector("#fahrenheit-link");
 fahrenheitLink.addEventListener("click", fahrenheitTemperature);
