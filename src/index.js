@@ -63,7 +63,7 @@ function formatDay(timestamp) {
 
   return `${day}, ${month} ${number}`;
 }
-
+debugging;
 function displayForecast(response) {
   let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
@@ -97,13 +97,13 @@ function displayForecast(response) {
       }
     }
   });
-
+  console.log(forecast[index].temp.max);
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
 }
 
 function getForecast(coordinates) {
-  let apiKey = "4c9b53e4f8f5eb00df5915bdca340605";
+  let apiKey = "c3f2d7caa74be8bea16decd3abf497cd";
   let units = "metric";
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=${units}`;
 
@@ -112,7 +112,7 @@ function getForecast(coordinates) {
 
 function cityPosition(position) {
   position.preventDefault();
-  let apiKey = "b110a6f2cf89a7609c27cec0f53fa75b";
+  let apiKey = "c3f2d7caa74be8bea16decd3abf497cd";
   let units = "metric";
   let cityinput = document.querySelector("#search-city-input");
   let cityname = cityinput.value;
@@ -155,7 +155,7 @@ function currentTemperature(response) {
 function currentPosition(position) {
   let latitude = position.coords.latitude;
   let longitude = position.coords.longitude;
-  let apiKey = "b110a6f2cf89a7609c27cec0f53fa75b";
+  let apiKey = "c3f2d7caa74be8bea16decd3abf497cd";
   let units = "metric";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`;
 
@@ -182,27 +182,17 @@ function fahrenheitTemperature(event) {
   event.preventDefault();
   let fahrenheitTemp = (celsTemp * 9) / 5 + 32;
   let realFahrenheitTemp = (feelsLike * 9) / 5 + 32;
-  let forecastMaxTemp = (maxTemp * 9) / 5 + 32;
-  let forecastMinTemp = (minTemp * 9) / 5 + 32;
 
   let cityMainTemp = document.querySelector("#main-city-temp");
   let fahDegrees = document.querySelector("#main-degrees");
   let realFeel = document.querySelector("#real-feel");
   let realFahDegrees = document.querySelector("#real-degrees");
-  let forecastMax = document.querySelector("#forecast-max");
-  let forecastMin = document.querySelector("#forecast-min");
-  let forecastFirst = document.querySelector("#forecast-first");
-  let forecastSecond = document.querySelector("#forecast-second");
 
   cityMainTemp.innerHTML = Math.round(fahrenheitTemp);
   realFeel.innerHTML = Math.round(realFahrenheitTemp);
-  forecastMax.innerHTML = Math.round(forecastMaxTemp);
-  forecastMin.innerHTML = Math.round(forecastMinTemp);
 
   fahDegrees.innerHTML = `°F`;
   realFahDegrees.innerHTML = `°F`;
-  forecastFirst.innerHTML = `°F`;
-  forecastSecond.innerHTML = `°F`;
 
   celsiusLink.classList.remove("active");
   fahrenheitLink.classList.add("active");
@@ -214,20 +204,12 @@ function celsiusTemperature(event) {
   let celDegrees = document.querySelector("#main-degrees");
   let realFeel = document.querySelector("#real-feel");
   let realCelDegrees = document.querySelector("#real-degrees");
-  let forecastMax = document.querySelector("#forecast-max");
-  let forecastMin = document.querySelector("#forecast-min");
-  let forecastFirst = document.querySelector("#forecast-first");
-  let forecastSecond = document.querySelector("#forecast-second");
 
   cityMainTemp.innerHTML = celsTemp;
   realFeel.innerHTML = feelsLike;
-  forecastMax.innerHTML = maxTemp;
-  forecastMin.innerHTML = minTemp;
 
   celDegrees.innerHTML = `°C`;
   realCelDegrees.innerHTML = `°C`;
-  forecastFirst.innerHTML = `°C`;
-  forecastSecond.innerHTML = `°C`;
 
   fahrenheitLink.classList.remove("active");
   celsiusLink.classList.add("active");
@@ -235,8 +217,6 @@ function celsiusTemperature(event) {
 
 let celsTemp = null;
 let feelsLike = null;
-let maxTemp = null;
-let minTemp = null;
 
 let fahrenheitLink = document.querySelector("#fahrenheit-link");
 fahrenheitLink.addEventListener("click", fahrenheitTemperature);
@@ -244,7 +224,7 @@ fahrenheitLink.addEventListener("click", fahrenheitTemperature);
 let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", celsiusTemperature);
 
-let apiKey = "b110a6f2cf89a7609c27cec0f53fa75b";
+let apiKey = "c3f2d7caa74be8bea16decd3abf497cd";
 let city = "port erin";
 let units = "metric";
 let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
