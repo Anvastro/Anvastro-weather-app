@@ -63,7 +63,7 @@ function formatDay(timestamp) {
 
   return `${day}, ${month} ${number}`;
 }
-debugging;
+
 function displayForecast(response) {
   let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
@@ -97,13 +97,13 @@ function displayForecast(response) {
       }
     }
   });
-  console.log(forecast[index].temp.max);
+
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
 }
 
 function getForecast(coordinates) {
-  let apiKey = "c3f2d7caa74be8bea16decd3abf497cd";
+  let apiKey = "4c9b53e4f8f5eb00df5915bdca340605";
   let units = "metric";
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=${units}`;
 
@@ -112,7 +112,7 @@ function getForecast(coordinates) {
 
 function cityPosition(position) {
   position.preventDefault();
-  let apiKey = "c3f2d7caa74be8bea16decd3abf497cd";
+  let apiKey = "b110a6f2cf89a7609c27cec0f53fa75b";
   let units = "metric";
   let cityinput = document.querySelector("#search-city-input");
   let cityname = cityinput.value;
@@ -155,7 +155,7 @@ function currentTemperature(response) {
 function currentPosition(position) {
   let latitude = position.coords.latitude;
   let longitude = position.coords.longitude;
-  let apiKey = "c3f2d7caa74be8bea16decd3abf497cd";
+  let apiKey = "b110a6f2cf89a7609c27cec0f53fa75b";
   let units = "metric";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`;
 
@@ -224,7 +224,7 @@ fahrenheitLink.addEventListener("click", fahrenheitTemperature);
 let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", celsiusTemperature);
 
-let apiKey = "c3f2d7caa74be8bea16decd3abf497cd";
+let apiKey = "b110a6f2cf89a7609c27cec0f53fa75b";
 let city = "port erin";
 let units = "metric";
 let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
