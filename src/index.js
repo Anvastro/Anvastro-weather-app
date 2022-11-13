@@ -84,9 +84,9 @@ function displayForecast(response) {
           <div class="card-body">
           <h5 class="card-title"><span id="forecast-max">${Math.round(
             forecastDay.temp.max
-          )}</span><span id="forecast-first"></span> | <span id="forecast-min">${Math.round(
+          )}</span><span id="forecast-first">°C</span> | <span id="forecast-min">${Math.round(
             forecastDay.temp.min
-          )}</span><span id="forecast-second"></span>
+          )}</span><span id="forecast-second">°C</span>
           </h5>
           <h6 id="forecast-description" class="card-text">${
             forecastDay.weather[0].description
