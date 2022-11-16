@@ -149,6 +149,15 @@ function currentTemperature(response) {
   celsTemp = Math.round(response.data.main.temp);
   feelsLike = Math.round(response.data.main.feels_like);
 
+  let celDegrees = document.querySelector("#main-degrees");
+  let realCelDegrees = document.querySelector("#real-degrees");
+
+  celDegrees.innerHTML = `°C`;
+  realCelDegrees.innerHTML = `°C`;
+
+  fahrenheitLink.classList.remove("active");
+  celsiusLink.classList.add("active");
+
   getForecast(response.data.coord);
 }
 
